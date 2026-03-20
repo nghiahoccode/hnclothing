@@ -1,0 +1,100 @@
+package com.hnclothing.config;
+
+import com.hnclothing.user.UserService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Autowired
+    private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @SuppressWarnings("deprecation")
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(UserService userService) {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userService);
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http, DaoAuthenticationProvider authenticationProvider, UserService userService) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+
+                        // 1. PUBLIC: Cho phép truy cập công cộng (Login, Register, Static)
+                        .requestMatchers(
+                                "/login",
+                                "/register",
+                                "/css/**", "/js/**", "/webjars/**", "/uploads/**","/images/**",
+                                "/",
+                                "/error/**",
+                                "/user/product",
+                                "/user/contact",
+                                "/user/about",
+                                "/user/home",
+                                "/user/product_detail",
+                                "/product/**",
+                                "/user/cart",
+                                "/products/by-category/*",
+                                "/user/cart/add",
+                                "/user/cart/remove/**",
+                                "/error/access-denied",
+                                "/user/checkout",
+                                "/user/order_success/**",
+                                "/place-order"
+                                ,"/user/cart/add-and-checkout"
+                                , "/user/cart/update-quantity"
+                                ,"/chat"
+                                ,"/forgot-password"
+                                ,"/reset-password/**"
+                                ,"/reset-password"
+
+                        ).permitAll()
+
+                        // 2. PHÂN QUYỀN ADMIN: Chỉ ROLE_ADMIN truy cập /admin/**
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // 3. BẤT KỲ CÁI CÒN LẠI: Yêu cầu xác thực
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID", "remember-me")
+                        .permitAll()
+                )
+                .rememberMe(rememberMe -> rememberMe
+                        .key("CoolmateSecretKey123")
+                        .tokenValiditySeconds(86400)
+                        .userDetailsService(userService)
+                )
+                .authenticationProvider(authenticationProvider);
+
+        return http.build();
+    }
+}
