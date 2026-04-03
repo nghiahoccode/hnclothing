@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - CoolFashion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            padding-top: 55px !important;
+            background-color: #f0f0f0 !important;
+        }
+
+
+        .mt-5.pt-3 {
+            margin-top: 2rem !important;
+        }
+
+
+
+
+
+
+
+       /* Tùy chỉnh Font chữ nếu có thể, ưu tiên Montserrat hoặc Playfair Display */
+.custom-navbar {
+   background-color: rgba(255, 255, 255, 0.98);
+   backdrop-filter: blur(10px);
+   border-bottom: 1px solid #f0f0f0;
+   padding: 15px 0;
+   transition: all 0.3s ease;
+}
+
+/* Logo Style */
+.luxury-logo {
+   font-weight: 800;
+   letter-spacing: 2px;
+   color: #1a1a1a !important;
+   font-size: 1.5rem;
+}
+.luxury-logo span {
+   font-weight: 300;
+   color: #bfa37e; /* Màu Gold nhạt */
+}
+
+/* Navigation Links */
+.navbar-nav .nav-link {
+   color: #444 !important;
+   font-size: 0.9rem;
+   text-transform: uppercase;
+   font-weight: 500;
+   letter-spacing: 1px;
+   margin: 0 10px;
+   position: relative;
+}
+
+.navbar-nav .nav-link::after {
+   content: '';
+   position: absolute;
+   width: 0;
+   height: 1.5px;
+   bottom: 0;
+   left: 0;
+   background-color: #bfa37e;
+   transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+   width: 100%;
+}
+
+/* Search Box Clean */
+.search-box {
+   border-bottom: 1px solid #ddd;
+   padding-bottom: 2px;
+}
+.form-control-clean {
+   border: none;
+   background: transparent;
+   outline: none;
+   font-size: 0.9rem;
+   padding: 5px;
+}
+.btn-search {
+   border: none;
+   background: none;
+   color: #888;
+}
+
+/* Icons & Badge */
+.nav-icon-link {
+   color: #1a1a1a;
+   font-size: 1.2rem;
+   text-decoration: none;
+   transition: color 0.3s;
+}
+.nav-icon-link:hover {
+   color: #bfa37e;
+}
+
+.cart-badge {
+   position: absolute;
+   top: -5px;
+   right: -10px;
+   background-color: #1a1a1a;
+   color: #fff;
+   font-size: 0.65rem;
+   padding: 2px 6px;
+   border-radius: 50%;
+   font-weight: bold;
+}
+
+/* Dropdown Luxury */
+.dropdown-menu {
+   border-radius: 0;
+   margin-top: 15px;
+   font-size: 0.9rem;
+}
+.dropdown-item:hover {
+   background-color: #f9f9f9;
+   color: #bfa37e;
+}
+
+
+
+
+        :root {
+    --luxury-gold: #d4af37;
+    --luxury-dark: #1e2c3d;
+    --luxury-soft-gold: rgba(212, 175, 55, 0.1);
+    --text-main: #2d3436;
+    --bg-light: #fdfdfd;
+}
+
+/* Base Styles */
+body { background-color: var(--bg-light); color: var(--text-main); font-family: 'Inter', sans-serif; }
+.rounded-24 { border-radius: 24px; }
+
+/* Header & Badges */
+.about-header { padding: 100px 0; background: radial-gradient(circle at center, #fff, #f4f7f6); }
+.badge-luxury {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--luxury-gold);
+    color: var(--luxury-gold);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.luxury-title { font-weight: 800; color: var(--luxury-dark); letter-spacing: -2px; }
+
+/* Quote Section */
+.luxury-quote {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+    border: 1px solid var(--luxury-soft-gold);
+    position: relative;
+    margin-bottom: 80px;
+}
+.quote-icon {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--luxury-gold);
+    color: white;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+/* Image Stack & Badge */
+.image-stack { position: relative; padding-right: 20px; }
+.experience-badge {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    background: var(--luxury-dark);
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.experience-badge .number { display: block; font-size: 1.5rem; font-weight: 800; color: var(--luxury-gold); }
+.experience-badge .text { font-size: 0.7rem; text-transform: uppercase; }
+
+/* Process Steps */
+.step-card {
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    transition: 0.3s;
+    height: 100%;
+}
+.step-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #eee;
+    margin-bottom: 10px;
+}
+.step-card:hover .step-number { color: var(--luxury-gold); }
+
+/* Feature Box */
+.luxury-feature-box {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.04);
+    transition: all 0.4s ease;
+    border: 1px solid transparent;
+}
+.luxury-feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 55px rgba(0,0,0,0.08);
+    border-color: var(--luxury-soft-gold);
+}
+.luxury-feature-box.active { background: linear-gradient(145deg, #ffffff, #fffcf5); border: 1px solid var(--luxury-gold); }
+
+/* Buttons */
+.btn-luxury-lg {
+    background: var(--luxury-gold);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 14px;
+    font-weight: 700;
+    border: none;
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+.btn-outline-light-luxury {
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 14px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+.btn-outline-light-luxury:hover { border-color: white; background: white; color: var(--luxury-dark); }
+
+/* CTA Section */
+.luxury-cta-section {
+    background: var(--luxury-dark);
+    padding: 80px 40px;
+    border-radius: 40px;
+    color: white;
+    margin-top: 100px;
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container">
+        <a class="navbar-brand luxury-logo" th:href="@{/}" href="#">
+            HN <span>CLOTHING</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" href="#">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/product}" href="#">Sản phẩm</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        Danh mục
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                        <li th:each="c : ${categories}">
+                            <a class="dropdown-item" th:href="@{/products/by-category/{id}(id=${c.id})}" th:text="${c.name}"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active-link" th:href="@{/user/about}" href="#">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/contact}" href="#">Liên hệ</a>
+                </li>
+            </ul>
+
+            <form class="d-flex search-box me-4" th:action="@{/user/product}" method="get">
+                <input class="form-control-clean" type="search" placeholder="Tìm kiếm..." name="keyword" th:value="${keyword}">
+                <button class="btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+            <div class="d-flex align-items-center gap-3">
+                <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a th:href="@{/login}" class="nav-icon-link" title="Đăng nhập">
+                        <i class="far fa-user"></i>
+                    </a>
+                </th:block>
+
+                <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                    <div class="dropdown">
+                        <a href="#" class="nav-icon-link dropdown-toggle" id="userMenuDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="userMenuDropdown">
+                            <li><a class="dropdown-item" th:href="@{/user/profile}"><i class="far fa-id-card me-2"></i>Tài khoản</a></li>
+                            <li><a class="dropdown-item" th:href="@{/user/my_orders}"><i class="fas fa-history me-2"></i>Đơn hàng</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+
+                <a th:href="@{/user/cart}" class="nav-icon-link position-relative" title="Giỏ hàng">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" th:text="${cartItemCount}">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+<div class="about-header text-center">
+    <div class="container">
+        <div class="badge-luxury mb-3">Since 2026</div>
+        <h1 class="display-3 luxury-title">Câu chuyện HN CLOTING</h1>
+        <p class="lead mt-3 subtitle">Kiến tạo phong cách tối giản hiện đại</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row mb-5 justify-content-center">
+        <div class="col-lg-10">
+            <div class="luxury-quote">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <h3 class="mb-0">
+                    "Sự tối giản là chìa khóa của phong cách lâu dài. <br>
+                    <span class="highlight-gold">Chúng tôi tạo ra sản phẩm, bạn tạo ra sự tự tin."</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center mb-5 pb-5">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="image-stack">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800" alt="Fabric" class="img-fluid rounded-24 shadow-lg">
+                <div class="experience-badge">
+                    <span class="number">100+</span>
+                    <span class="text">Mẫu thiết kế độc quyền</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 ps-lg-5">
+            <h2 class="section-title mb-4">Định nghĩa lại phong cách tiện lợi</h2>
+            <p class="description-text">
+                CoolFashion tin rằng trang phục nam giới cần phải <strong>thực dụng, chất lượng cao và có giá trị vượt trội</strong>. Chúng tôi không chỉ bán quần áo, chúng tôi cung cấp một giải pháp tủ đồ thông minh.
+            </p>
+            <p class="description-text">
+                Chúng tôi cắt giảm mọi chi phí trung gian không cần thiết, tập trung 100% vào việc tìm kiếm chất liệu tốt nhất và tối ưu hóa quy trình sản xuất. Mỗi đường kim mũi chỉ đều được kiểm soát nghiêm ngặt.
+            </p>
+            <div class="row g-3 mt-2">
+                <div class="col-sm-6">
+                    <div class="check-item"><i class="fas fa-check-circle"></i> Chất lượng cao cấp</div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="check-item"><i class="fas fa-check-circle"></i> Giá thành minh bạch</div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="check-item"><i class="fas fa-check-circle"></i> Chất liệu bền vững</div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="check-item"><i class="fas fa-check-circle"></i> Dịch vụ tận tâm</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="process-section py-5 mb-5">
+        <h2 class="section-title text-center mb-5">Quy trình chuyên nghiệp</h2>
+        <div class="row g-4">
+            <div class="col-md-3 text-center">
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h5>Nghiên cứu</h5>
+                    <p class="small text-muted">Phân tích chất liệu và phom dáng người Việt.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h5>Thiết kế</h5>
+                    <p class="small text-muted">Tối giản hóa chi tiết, tối đa hóa công năng.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h5>Sản xuất</h5>
+                    <p class="small text-muted">Gia công tỉ mỉ tại các nhà máy tiêu chuẩn xuất khẩu.</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h5>Kiểm soát</h5>
+                    <p class="small text-muted">Kiểm tra 100% sản phẩm trước khi đóng gói.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title text-center mb-5">Giá trị cốt lõi</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="luxury-feature-box">
+                <div class="feature-icon icon-blue"><i class="fas fa-leaf"></i></div>
+                <h4>Thân thiện môi trường</h4>
+                <p>Sử dụng sợi tự nhiên như <strong>Bamboo, Modal</strong>, giúp da luôn được "thở" và giảm thiểu rác thải nhựa.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="luxury-feature-box active">
+                <div class="feature-icon icon-gold"><i class="fas fa-sync-alt"></i></div>
+                <h4>Đổi trả 60 ngày</h4>
+                <p>Trải nghiệm mua sắm không rủi ro với chính sách đổi trả dài nhất thị trường, bảo vệ quyền lợi khách hàng tuyệt đối.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="luxury-feature-box">
+                <div class="feature-icon icon-green"><i class="fas fa-hand-holding-usd"></i></div>
+                <h4>Giá trị lâu dài</h4>
+                <p>Mỗi sản phẩm là một khoản đầu tư bền vững, phom dáng không lỗi thời và chất liệu bền bỉ qua nhiều lần giặt.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="luxury-cta-section text-center">
+        <h3 class="fw-bold mb-3">Sẵn sàng để trở nên khác biệt?</h3>
+        <p class="mb-4">Hãy để chúng tôi đồng hành cùng phong cách của bạn.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a th:href="@{/user/product}" class="btn btn-luxury-lg">
+                <i class="fas fa-shopping-bag me-2"></i> KHÁM PHÁ CỬA HÀNG
+            </a>
+            <a href="/user/contact" class="btn btn-outline-light-luxury">LIÊN HỆ TƯ VẤN</a>
+        </div>
+    </div>
+
+    <div th:replace="~{chat-popup :: chatbox}"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleChatbox() { document.getElementById('chatboxContainer').classList.toggle('d-none'); }
+    function sendMessage() {
+        const input = document.getElementById('chatboxInput'); if(input.value.trim()==="")return;
+        appendMessage(input.value, 'user'); input.value='';
+        setTimeout(()=>appendMessage("Cảm ơn bạn đã quan tâm đến HN CLOTHING!", 'bot'), 1000);
+    }
+    function appendMessage(text, type) {
+        const d = document.createElement('div'); d.className = 'message-bubble'; d.style.maxWidth="80%";
+        if(type==='user'){d.style.alignSelf="flex-end";d.style.backgroundColor="#1E2C3D";d.style.color="white";d.innerText=text;}
+        else{d.style.alignSelf="flex-start";d.style.backgroundColor="#e8f5e9";d.innerText=text;}
+        document.getElementById('chatboxMessages').appendChild(d);
+    }
+</script>
+
+</body>
+</html>

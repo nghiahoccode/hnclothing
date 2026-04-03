@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - CoolFashion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+
+
+
+
+        body {
+             padding-top: 55px !important;
+             background-color: #f0f0f0 !important;
+         }
+
+
+         .mt-5.pt-3 {
+             margin-top: 2rem !important;
+         }
+
+
+
+
+
+
+
+               /* Tùy chỉnh Font chữ nếu có thể, ưu tiên Montserrat hoặc Playfair Display */
+        .custom-navbar {
+           background-color: rgba(255, 255, 255, 0.98);
+           backdrop-filter: blur(10px);
+           border-bottom: 1px solid #f0f0f0;
+           padding: 15px 0;
+           transition: all 0.3s ease;
+        }
+
+        /* Logo Style */
+        .luxury-logo {
+           font-weight: 800;
+           letter-spacing: 2px;
+           color: #1a1a1a !important;
+           font-size: 1.5rem;
+        }
+        .luxury-logo span {
+           font-weight: 300;
+           color: #bfa37e; /* Màu Gold nhạt */
+        }
+
+        /* Navigation Links */
+        .navbar-nav .nav-link {
+           color: #444 !important;
+           font-size: 0.9rem;
+           text-transform: uppercase;
+           font-weight: 500;
+           letter-spacing: 1px;
+           margin: 0 10px;
+           position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+           content: '';
+           position: absolute;
+           width: 0;
+           height: 1.5px;
+           bottom: 0;
+           left: 0;
+           background-color: #bfa37e;
+           transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+           width: 100%;
+        }
+
+        /* Search Box Clean */
+        .search-box {
+           border-bottom: 1px solid #ddd;
+           padding-bottom: 2px;
+        }
+        .form-control-clean {
+           border: none;
+           background: transparent;
+           outline: none;
+           font-size: 0.9rem;
+           padding: 5px;
+        }
+        .btn-search {
+           border: none;
+           background: none;
+           color: #888;
+        }
+
+        /* Icons & Badge */
+        .nav-icon-link {
+           color: #1a1a1a;
+           font-size: 1.2rem;
+           text-decoration: none;
+           transition: color 0.3s;
+        }
+        .nav-icon-link:hover {
+           color: #bfa37e;
+        }
+
+        .cart-badge {
+           position: absolute;
+           top: -5px;
+           right: -10px;
+           background-color: #1a1a1a;
+           color: #fff;
+           font-size: 0.65rem;
+           padding: 2px 6px;
+           border-radius: 50%;
+           font-weight: bold;
+        }
+
+        /* Dropdown Luxury */
+        .dropdown-menu {
+           border-radius: 0;
+           margin-top: 15px;
+           font-size: 0.9rem;
+        }
+        .dropdown-item:hover {
+           background-color: #f9f9f9;
+           color: #bfa37e;
+        }
+
+
+
+
+
+
+
+
+
+                /* --- Contact Specific Styles --- */
+                /* Tông màu chủ đạo */
+:root {
+    --gold: #d4af37;
+    --light-bg: #fcfcfc;
+    --soft-gray: #f4f4f4;
+    --text-dark: #2d3436;
+    --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+.contact-wrapper-light {
+    background: #ffffff;
+    border-radius: 40px; /* Bo góc cực đại tạo sự mềm mại */
+    overflow: hidden;
+    box-shadow: var(--glass-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.border-end-light {
+    border-right: 1px solid var(--soft-gray);
+}
+
+/* Sidebar Light */
+.contact-info-sidebar-light {
+    padding: 70px 50px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+}
+
+.badge-gold {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.text-gold { color: var(--gold); }
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--soft-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    color: var(--gold);
+    background: #fff;
+    transition: 0.4s;
+}
+
+.info-item-light {
+    display: flex;
+    margin-bottom: 35px;
+    align-items: center;
+}
+
+.info-item-light:hover .icon-circle {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+    transform: scale(1.1);
+}
+
+.info-item-light .label {
+    font-size: 0.7rem;
+    color: #991;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-item-light p { margin: 0; font-weight: 600; color: var(--text-dark); }
+
+.map-wrapper-light {
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+/* Form Light & Floating Labels */
+.contact-form-light {
+    padding: 70px 60px;
+}
+
+.floating-group {
+    position: relative;
+}
+
+.floating-input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--text-dark);
+    transition: 0.3s;
+}
+
+.floating-group label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #b2bec3;
+    pointer-events: none;
+    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.floating-input:focus ~ label,
+.floating-input:valid ~ label {
+    top: -20px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.floating-input:focus {
+    outline: none;
+    border-bottom: 1.5px solid var(--gold);
+}
+
+/* Button Luxury Light */
+.btn-luxury-light {
+    background: #fff;
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+    padding: 18px 45px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: 0.4s;
+}
+
+.btn-luxury-light:hover {
+    background: var(--text-dark);
+    color: #fff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Mobile */
+@media (max-width: 991px) {
+    .border-end-light { border-right: none; border-bottom: 1px solid var(--soft-gray); }
+    .contact-form-light { padding: 50px 30px; }
+}
+    </style>
+</head>
+<body>
+
+
+
+
+
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+    <div class="container">
+        <a class="navbar-brand luxury-logo" th:href="@{/}" href="#">
+            HN <span>CLOTHING</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active-link" th:href="@{/}" href="#">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/product}" href="#">Sản phẩm</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                        Danh mục
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                        <li th:each="c : ${categories}">
+                            <a class="dropdown-item" th:href="@{/products/by-category/{id}(id=${c.id})}" th:text="${c.name}"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/about}" href="#">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/contact}" href="#">Liên hệ</a>
+                </li>
+            </ul>
+
+            <form class="d-flex search-box me-4" th:action="@{/user/product}" method="get">
+                <input class="form-control-clean" type="search" placeholder="Tìm kiếm..." name="keyword" th:value="${keyword}">
+                <button class="btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+            <div class="d-flex align-items-center gap-3">
+                <th:block th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a th:href="@{/login}" class="nav-icon-link" title="Đăng nhập">
+                        <i class="far fa-user"></i>
+                    </a>
+                </th:block>
+
+                <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                    <div class="dropdown">
+                        <a href="#" class="nav-icon-link dropdown-toggle" id="userMenuDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg" aria-labelledby="userMenuDropdown">
+                            <li><a class="dropdown-item" th:href="@{/user/profile}"><i class="far fa-id-card me-2"></i>Tài khoản</a></li>
+                            <li><a class="dropdown-item" th:href="@{/user/my_orders}"><i class="fas fa-history me-2"></i>Đơn hàng</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+
+                <a th:href="@{/user/cart}" class="nav-icon-link position-relative" title="Giỏ hàng">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" th:text="${cartItemCount}">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5 pt-4 mb-5">
+    <div class="contact-wrapper-light">
+        <div class="row g-0">
+            <div class="col-lg-5 border-end-light">
+                <div class="contact-info-sidebar-light">
+                    <div class="sidebar-content">
+                        <span class="badge-gold mb-3">Liên hệ</span>
+                        <h2 class="display-6 fw-bold text-dark mb-4">Kết nối với <br><span class="text-gold">HN CLOTHING</span></h2>
+
+                        <div class="info-list-light">
+                            <div class="info-item-light">
+                                <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <span class="label">Showroom</span>
+                                    <p>555 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+                                </div>
+                            </div>
+
+                            <div class="info-item-light">
+                                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                                <div>
+                                    <span class="label">Hotline 24/7</span>
+                                    <p>1900 123 456</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="map-wrapper-light mt-5">
+                            <iframe src="https://www.google.com/maps/embed?..." width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="contact-form-light">
+                    <h4 class="fw-bold mb-5 text-dark letter-spacing-1">GỬI TIN NHẮN</h4>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-5">
+                                <div class="floating-group">
+                                    <input type="text" class="floating-input" required>
+                                    <label>Danh tính của bạn</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <div class="floating-group">
+                                    <input type="email" class="floating-input" required>
+                                    <label>Địa chỉ Email</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <div class="floating-group">
+                                <textarea class="floating-input" rows="3" required></textarea>
+                                <label>Nội dung yêu cầu...</label>
+                            </div>
+                        </div>
+                        <div class="text-start pt-3">
+                            <button type="submit" class="btn-luxury-light">
+                                GỬI YÊU CẦU <i class="fas fa-arrow-right ms-3"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="~{chat-popup :: chatbox}"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleChatbox() { document.getElementById('chatboxContainer').classList.toggle('d-none'); }
+    function sendMessage() {
+        const input = document.getElementById('chatboxInput'); if(input.value.trim()==="")return;
+        appendMessage(input.value, 'user'); input.value='';
+        setTimeout(()=>appendMessage("Chúng tôi sẽ phản hồi sớm!", 'bot'), 1000);
+    }
+    function appendMessage(text, type) {
+        const d = document.createElement('div'); d.className = 'message-bubble'; d.style.maxWidth="80%";
+        if(type==='user'){d.style.alignSelf="flex-end";d.style.backgroundColor="#1E2C3D";d.style.color="white";d.innerText=text;}
+        else{d.style.alignSelf="flex-start";d.style.backgroundColor="#e8f5e9";d.innerText=text;}
+        document.getElementById('chatboxMessages').appendChild(d);
+    }
+</script>
+</body>
+</html>
