@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -21,27 +23,15 @@ public class AdminHomeController {
     private final OrderRepository orderRepository;
 
     @GetMapping("/home")
-    public String showHomePage(Model model) {
-        // 1. Thống kê tổng quan
-        BigDecimal totalRevenue = orderService.getTotalRevenue();
-        long totalOrders = orderRepository.count();
-        long pendingOrders = orderRepository.findByStatus(OrderStatus.PENDING).size();
+    public String showHomePage(
+            @RequestParam(name = "year", required = false) Integer year,
+            Model model) {
 
-        // 2. [CẬP NHẬT] Lấy Top sản phẩm bán chạy (Top 10)
-        List<OrderService.ProductSaleDTO> topSellingProducts = orderService.getTopSellingProducts();
+        int selectedYear = (year == null) ? LocalDate.now().getYear() : year;
 
-        // 3. Lấy dữ liệu biểu đồ doanh thu 6 tháng
-        List<OrderService.RevenueChartDTO> revenueData = orderService.getRevenueLast6Months();
-
-        // 4. Add to Model
-        model.addAttribute("pageTitle", "Trang Chủ Quản Trị");
-        model.addAttribute("totalRevenue", totalRevenue);
-        model.addAttribute("totalOrders", totalOrders);
-        model.addAttribute("pendingOrders", pendingOrders);
-
-        // Truyền dữ liệu xuống JavaScript
-        model.addAttribute("topSellingProducts", topSellingProducts);
-        model.addAttribute("revenueData", revenueData);
+        model.addAttribute("selectedYear", selectedYear);
+        model.addAttribute("revenueData", orderService.getRevenueByYear(selectedYear));
+        model.addAttribute("productSales", orderService.getProductSales());
 
         return "admin/home";
     }
