@@ -38,6 +38,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             @Param("keyword") String keyword,
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice,
-            @Param("sortOrder") String sortOrder // THÊM THAM SỐ
+            @Param("sortOrder") String sortOrder
     );
 }
