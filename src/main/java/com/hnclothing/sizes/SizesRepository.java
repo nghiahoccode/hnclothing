@@ -1,0 +1,13 @@
+package com.hnclothing.sizes;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface SizesRepository extends JpaRepository<Sizes, Integer> {
+
+    boolean existsBySizeNameIgnoreCase(String sizeName);
+
+    Optional<Sizes> findBySizeName(String sizeName);
+}
